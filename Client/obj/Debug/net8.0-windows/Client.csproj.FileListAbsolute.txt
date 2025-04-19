@@ -28,3 +28,4 @@ C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManage
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.CreateBookForm.resources
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.CrudForm.resources
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.UpdateBookForm.resources
+C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.sourcelink.json

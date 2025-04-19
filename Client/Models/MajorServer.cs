@@ -279,37 +279,18 @@ public class MajorServer
         }
     }
 
-    private List<(string IpAddress, int Port)> GetActiveMinorServers()
-    {
-        var activeServers = new List<(string IpAddress, int Port)>();
-        using (var connection = new NpgsqlConnection(ConnectionString))
-        {
-            connection.Open();
-            var command = new NpgsqlCommand(
-                "SELECT ip_address, port FROM ActiveInstances " +
-                "WHERE role = 'minor_server' AND last_seen > NOW() - INTERVAL '10 seconds' and ip_address is not null;",
-                connection);
-            using (var reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    activeServers.Add((reader.GetString(0), reader.GetInt32(1)));
-                }
-            }
-        }
-        return activeServers;
-    }
-
     private void StartBroadcasting()
     {
         var udpClient = new UdpDiscoveryClient(9999);
         string message = $"{ipAddress}:{port}";
 
+        var activeIPs = ArpScanner.GetActiveIPs();
+
         while (true)
         {
             try
             {
-                udpClient.SendBroadcastMessage(message);
+                udpClient.SendBroadcastMessage(activeIPs, message);
             }
             catch (Exception ex)
             {

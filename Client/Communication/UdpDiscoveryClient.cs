@@ -18,22 +18,24 @@ namespace Client.Communication
         /// Отправляет широковещательное сообщение для обнаружения мажорного сервера.
         /// </summary>
         /// <param name="message">Сообщение для отправки.</param>
-        public void SendBroadcastMessage(string message)
+        public void SendBroadcastMessage(List<string> deviceIps, string message)
         {
             using (UdpClient udpClient = new UdpClient())
             {
-                udpClient.EnableBroadcast = true;
-
                 byte[] data = Encoding.UTF8.GetBytes(message);
-                IPEndPoint broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, broadcastPort);
 
-                try
+                foreach (var ip in deviceIps)
                 {
-                    udpClient.Send(data, data.Length, broadcastEndpoint);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при отправке широковещательного сообщения: {ex.Message}");
+                    try
+                    {
+                        IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse(ip), broadcastPort);
+                        udpClient.Send(data, data.Length, endpoint);
+                        Console.WriteLine($"Отправлено сообщение на устройство: {ip}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Ошибка при отправке сообщения на устройство {ip}: {ex.Message}");
+                    }
                 }
             }
         }

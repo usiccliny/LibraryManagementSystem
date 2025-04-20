@@ -36,8 +36,6 @@ namespace Client
                         var udpDiscoveryForMinor = new UdpDiscoveryClient(9999);
                         var (dispatcherIp, dispatcherPort) = udpDiscoveryForMinor.DiscoverDispatcher();
 
-                        MessageBox.Show ($"Мажорный сервер найден: IP={dispatcherIp}, Port={dispatcherPort}");
-
                         var minorServer = new MinorServer(instanceId, ipAddress, dispatcherIp, dispatcherPort);
                         minorServer.Start();
                         break;

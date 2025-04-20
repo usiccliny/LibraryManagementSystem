@@ -1,10 +1,14 @@
 ﻿using Client.Communication;
+using RabbitMQ.Client.Events;
+using RabbitMQ.Client;
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Net;
-using System.Net.Sockets;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Net.Sockets;
 
 public class MinorServer
 {
@@ -15,12 +19,16 @@ public class MinorServer
     private string role;
     private HttpListener httpListener;
 
+    private readonly List<WebSocket> _clients = new List<WebSocket>();
+    private readonly RabbitMqService _rabbitMqService;
+
     public MinorServer(string serverId, string serverIp, string majorServerIp, int majorServerPort)
     {
         this.serverId = serverId;
         this.serverIp = serverIp;
         this.majorServerIp = majorServerIp;
         this.majorServerPort = majorServerPort;
+        _rabbitMqService = new RabbitMqService(majorServerIp, "user1", "user1");
     }
 
     public void Start()
@@ -32,9 +40,31 @@ public class MinorServer
         this.role = RegisterWithMajorServer(port);
         listener.Stop();
 
-        httpListener = new HttpListener();
-        httpListener.Prefixes.Add($"http://{serverIp}:{port}/api/");
-        httpListener.Start();
+        if (role == "crud")
+        {
+            httpListener = new HttpListener();
+            httpListener.Prefixes.Add($"http://{serverIp}:{port}/api/");
+            httpListener.Start();
+        }
+
+        if (role == "event")
+        {
+            StartWebSocketServer(port);
+
+            _rabbitMqService.SubscribeToQueue(message =>
+            {
+                foreach (var client in _clients)
+                {
+                    if (client.State == WebSocketState.Open)
+                    {
+                        Task.Run(async () =>
+                        {
+                            await client.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(message)), WebSocketMessageType.Text, true, CancellationToken.None);
+                        });
+                    }
+                }
+            });
+        }
 
         Thread httpThread = new Thread(HandleHttpRequests)
         {
@@ -49,6 +79,95 @@ public class MinorServer
         heartbeatThread.Start();
     }
 
+    private void StartWebSocketServer(int port)
+    {
+        httpListener = new HttpListener();
+        httpListener.Prefixes.Add($"http://{serverIp}:{port}/ws/");
+
+        try
+        {
+            httpListener.Start();
+        }
+        catch (HttpListenerException ex)
+        {
+            MessageBox.Show($"Ошибка при запуске WebSocket-сервера: {ex.Message}");
+            throw;
+        }
+
+        Thread webSocketThread = new Thread(HandleWebSocketConnections)
+        {
+            IsBackground = true
+        };
+        webSocketThread.Start();
+    }
+
+    private void HandleWebSocketConnections()
+    {
+        while (true)
+        {
+            try
+            {
+                var context = httpListener.GetContext();
+                if (context.Request.IsWebSocketRequest)
+                {
+                    ThreadPool.QueueUserWorkItem(state => AcceptWebSocketConnection(context));
+                }
+                else
+                {
+                    context.Response.StatusCode = 400; // Bad Request
+                    context.Response.Close();
+                }
+            }
+            catch (HttpListenerException ex)
+            {
+                MessageBox.Show($"Ошибка HttpListener: {ex.Message}");
+                break;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Неожиданная ошибка: {ex.Message}");
+            }
+        }
+    }
+
+    private async void AcceptWebSocketConnection(HttpListenerContext context)
+    {
+        var webSocketContext = await context.AcceptWebSocketAsync(null);
+        var webSocket = webSocketContext.WebSocket;
+
+        AddClient(webSocket);
+
+        try
+        {
+            var buffer = new byte[1024];
+            while (webSocket.State == WebSocketState.Open)
+            {
+                var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                if (result.MessageType == WebSocketMessageType.Close)
+                {
+                    await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
+                    RemoveClient(webSocket);
+                    break;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при работе с WebSocket: {ex.Message}");
+            RemoveClient(webSocket);
+        }
+    }
+
+    public void AddClient(WebSocket client)
+    {
+        _clients.Add(client);
+    }
+
+    public void RemoveClient(WebSocket client)
+    {
+        _clients.Remove(client);
+    }
+
     private void HandleHttpRequests()
     {
         while (true)
@@ -60,8 +179,10 @@ public class MinorServer
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка при обработке HTTP-запроса: {ex.Message}");
+                MessageBox.Show($"Ошибка при обработке HTTP-запроса: {ex.Message}");
             }
+
+            Thread.Sleep(1000);
         }
     }
 
@@ -77,34 +198,36 @@ public class MinorServer
             string requestData = new System.IO.StreamReader(request.InputStream).ReadToEnd();
 
             string responseMessage = "";
-            switch (path)
+
+            // Обработка GET и POST запросов для /api/books
+            if (path == "/api/books")
             {
-                case "/api/books":
-                    if (method == "GET")
-                    {
-                        responseMessage = SendMessageToMajorServer("GET_BOOKS");
-                    }
-                    else if (method == "POST")
-                    {
-                        responseMessage = SendMessageToMajorServer($"ADD_BOOK|{requestData}");
-                    }
-                    break;
+                if (method == "GET")
+                {
+                    responseMessage = SendMessageToMajorServer("GET_BOOKS");
+                }
+                else if (method == "POST")
+                {
+                    responseMessage = SendMessageToMajorServer($"ADD_BOOK|{requestData}");
+                }
+            }
+            // Обработка PUT и DELETE запросов для /api/books/{id}
+            else if (path.StartsWith("/api/books/") && path.Split('/').Length == 4)
+            {
+                string id = path.Split('/')[3];
 
-                case "/api/books/{id}":
-                    if (method == "PUT")
-                    {
-                        responseMessage = SendMessageToMajorServer($"UPDATE_BOOK|{requestData}");
-                    }
-                    else if (method == "DELETE")
-                    {
-                        string id = path.Split('/')[3];
-                        responseMessage = SendMessageToMajorServer($"DELETE_BOOK|{id}");
-                    }
-                    break;
-
-                default:
-                    responseMessage = "UNKNOWN_REQUEST";
-                    break;
+                if (method == "PUT")
+                {
+                    responseMessage = SendMessageToMajorServer($"UPDATE_BOOK|{id}|{requestData}");
+                }
+                else if (method == "DELETE")
+                {
+                    responseMessage = SendMessageToMajorServer($"DELETE_BOOK|{id}");
+                }
+            }
+            else
+            {
+                responseMessage = "UNKNOWN_REQUEST";
             }
 
             byte[] buffer = Encoding.UTF8.GetBytes(responseMessage);
@@ -113,7 +236,7 @@ public class MinorServer
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка при обработке HTTP-запроса: {ex.Message}");
+            MessageBox.Show($"Ошибка при обработке HTTP-запроса: {ex.Message}");
         }
         finally
         {
@@ -141,7 +264,7 @@ public class MinorServer
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка при отправке сообщения на мажорный сервер: {ex.Message}");
+                MessageBox.Show($"Ошибка при отправке сообщения на мажорный сервер: {ex.Message}");
                 throw;
             }
         }

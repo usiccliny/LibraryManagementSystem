@@ -17,6 +17,7 @@ public class MajorServer
     private const string ConnectionString = "Host=localhost;Port=5432;Database=library_db;Username=postgres;Password=11299133;";
     private TcpListener listener;
     private BookRepository bookRepository;
+    private readonly RabbitMqService _rabbitMqService;
 
     public MajorServer(string serverId, string ipAddress, int port)
     {
@@ -24,6 +25,7 @@ public class MajorServer
         this.ipAddress = ipAddress;
         this.port = port;
         this.bookRepository = new BookRepository(ConnectionString);
+        this._rabbitMqService = new RabbitMqService("localhost", "guest", "guest");
 
         IPAddress ip = IPAddress.Parse(ipAddress);
         this.listener = new TcpListener(ip, port);
@@ -139,20 +141,23 @@ public class MajorServer
                 else if (parts[0] == "ADD_BOOK")
                 {
                     var book = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(parts[1]);
-                    bookRepository.AddBook(book);
+                    book.Id = bookRepository.AddBook(book);
                     stream.Write(Encoding.UTF8.GetBytes("ACK"), 0, 3);
+                    _rabbitMqService.PublishMessage($"BOOK_ADDED|{Newtonsoft.Json.JsonConvert.SerializeObject(book)}");
                 }
                 else if (parts[0] == "UPDATE_BOOK")
                 {
-                    var book = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(parts[1]);
+                    var book = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(parts[2]);
                     bookRepository.UpdateBook(book);
                     stream.Write(Encoding.UTF8.GetBytes("ACK"), 0, 3);
+                    _rabbitMqService.PublishMessage($"BOOK_UPDATED|{Newtonsoft.Json.JsonConvert.SerializeObject(book)}");
                 }
                 else if (parts[0] == "DELETE_BOOK")
                 {
                     int id = int.Parse(parts[1]);
                     bookRepository.DeleteBook(id);
                     stream.Write(Encoding.UTF8.GetBytes("ACK"), 0, 3);
+                    _rabbitMqService.PublishMessage($"BOOK_DELETED|{id}");
                 }
             }
         }
@@ -253,12 +258,13 @@ public class MajorServer
     private string DetermineRole(Dictionary<string, string> activeServers)
     {
         bool hasCrud = activeServers.Values.Contains("crud");
-        bool hasCache = activeServers.Values.Contains("cache");
         bool hasEvent = activeServers.Values.Contains("event");
+        bool hasCache = activeServers.Values.Contains("cache");
 
         if (!hasCrud) return "crud";
-        if (!hasCache) return "cache";
         if (!hasEvent) return "event";
+        if (!hasCache) return "cache";
+
 
         return "fallback";
     }
@@ -296,6 +302,8 @@ public class MajorServer
             {
                 MessageBox.Show($"Ошибка при отправке широковещательного сообщения: {ex.Message}");
             }
+
+            Thread.Sleep(2000);
         }
     }
 
@@ -328,7 +336,7 @@ public class MajorServer
 
             // Проверяем, есть ли активный сервер с запрошенной ролью
             var checkCommand = new NpgsqlCommand(
-                "SELECT instance_id FROM MinorServerRoles WHERE role = @role AND last_seen > NOW() - INTERVAL '75 seconds';",
+                "SELECT instance_id FROM MinorServerRoles WHERE role = @role AND last_seen > NOW() - INTERVAL '5 seconds';",
                 connection);
             checkCommand.Parameters.AddWithValue("role", requestedRole);
             var existingServer = checkCommand.ExecuteScalar();
@@ -340,13 +348,15 @@ public class MajorServer
             }
         }
 
-        using (var connection = new NpgsqlConnection(ConnectionString))
+        using (var connection1 = new NpgsqlConnection(ConnectionString))
         {
+
+            connection1.Open();
 
             // Если сервера с запрошенной ролью нет, ищем сервер для переназначения
             var findServerCommand = new NpgsqlCommand(
-                "SELECT instance_id FROM MinorServerRoles WHERE last_seen > NOW() - INTERVAL '75 seconds' LIMIT 1;",
-                connection);
+                "SELECT instance_id FROM MinorServerRoles WHERE last_seen > NOW() - INTERVAL '5 seconds' LIMIT 1;",
+                connection1);
             var serverToReassign = findServerCommand.ExecuteScalar();
 
             if (serverToReassign == null)
@@ -357,7 +367,7 @@ public class MajorServer
             // Переназначаем роль найденному серверу
             var reassignCommand = new NpgsqlCommand(
                 "UPDATE MinorServerRoles SET role = @newRole, last_seen = CURRENT_TIMESTAMP WHERE instance_id = @instanceId;",
-                connection);
+                connection1);
             reassignCommand.Parameters.AddWithValue("newRole", requestedRole);
             reassignCommand.Parameters.AddWithValue("instanceId", serverToReassign.ToString());
             reassignCommand.ExecuteNonQuery();

@@ -63,11 +63,9 @@ namespace Client.Communication
                     // Отправка сообщения
                     byte[] data = Encoding.UTF8.GetBytes(message);
                     stream.Write(data, 0, data.Length);
-                    Console.WriteLine($"Отправлено сообщение: {message}");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Ошибка при отправке сообщения: {ex.Message}");
                     throw;
                 }
             }

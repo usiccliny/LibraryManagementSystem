@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.WebSockets;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.Communication;
@@ -12,11 +15,122 @@ namespace Client.Forms
         private readonly RestClient _restClient;
         private List<Book> books;
 
-        public CrudForm(string minorServerIp, int minorServerPort)
+        private string _eventsServerIp;
+        private int? _eventsServerPort;
+        private ClientWebSocket _webSocket;
+        private CancellationTokenSource _cancellationTokenSource;
+
+        public CrudForm(string minorServerCrudIp, int minorServerCrudPort, string? eventsServerIp, int? eventsServerPort)
         {
             InitializeComponent();
-            _restClient = new RestClient($"http://{minorServerIp}:{minorServerPort}");
-            LoadBooks(); ;
+            _restClient = new RestClient($"http://{minorServerCrudIp}:{minorServerCrudPort}");
+            _eventsServerIp = eventsServerIp;
+            _eventsServerPort = eventsServerPort;
+
+            LoadBooks();
+
+            _cancellationTokenSource = new CancellationTokenSource();
+            Task.Run(() => ConnectToEventsServerAsync(_cancellationTokenSource.Token));
+        }
+
+        private async Task ConnectToEventsServerAsync(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                try
+                {
+                    if (_eventsServerIp != null && _eventsServerPort.HasValue)
+                    {
+                        _webSocket = new ClientWebSocket();
+                        await _webSocket.ConnectAsync(new Uri($"ws://{_eventsServerIp}:{_eventsServerPort}/ws/"), cancellationToken);
+
+                        await ListenForMessagesAsync(_webSocket, cancellationToken);
+                    }
+                }
+                catch { }
+
+                await Task.Delay(TimeSpan.FromSeconds(2), cancellationToken);
+            }
+        }
+
+        private async Task ListenForMessagesAsync(ClientWebSocket webSocket, CancellationToken cancellationToken)
+        {
+            var buffer = new byte[1024 * 4];
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                try
+                {
+                    var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
+                    if (result.MessageType == WebSocketMessageType.Close)
+                    {
+                        await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
+                        break;
+                    }
+
+                    var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+
+                    ProcessMessage(message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при получении сообщения: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ProcessMessage(string message)
+        {
+            try
+            {
+                var parts = message.Split('|');
+                if (parts.Length < 2) return;
+
+                string eventType = parts[0];
+                string eventData = parts[1];
+
+                switch (eventType)
+                {
+                    case "BOOK_ADDED":
+                        var addedBook = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(eventData);
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            books.Add(addedBook);
+                            UpdateDataGridView();
+                        }));
+                        break;
+
+                    case "BOOK_UPDATED":
+                        var updatedBook = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(eventData);
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            var bookToUpdate = books.Find(b => b.Id == updatedBook.Id);
+                            if (bookToUpdate != null)
+                            {
+                                bookToUpdate.Title = updatedBook.Title;
+                                bookToUpdate.Author = updatedBook.Author;
+                            }
+                            UpdateDataGridView();
+                        }));
+                        break;
+
+                    case "BOOK_DELETED":
+                        int deletedBookId = int.Parse(eventData);
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            books.RemoveAll(b => b.Id == deletedBookId);
+                            UpdateDataGridView();
+                        }));
+                        break;
+
+                    default:
+                        Console.WriteLine($"Неизвестный тип события: {eventType}");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при обработке сообщения: {ex.Message}");
+            }
         }
 
         private async void LoadBooks()
@@ -53,12 +167,7 @@ namespace Client.Forms
                     bool isSuccess = await _restClient.AddBookAsync(newBook);
                     if (isSuccess)
                     {
-                        MessageBox.Show("Книга успешно добавлена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBooks(); // Обновляем список книг
-                    }
-                    else
-                    {
-                        MessageBox.Show("Не удалось добавить книгу.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)
@@ -93,17 +202,14 @@ namespace Client.Forms
                 {
                     var updatedBook = updateBookForm.Book;
 
+                    updatedBook.Id = selectedBook.Id;
+
                     try
                     {
                         bool isSuccess = await _restClient.UpdateBookAsync(updatedBook);
                         if (isSuccess)
                         {
-                            MessageBox.Show("Книга успешно обновлена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LoadBooks(); // Обновляем список книг
-                        }
-                        else
-                        {
-                            MessageBox.Show("Не удалось обновить книгу.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     catch (Exception ex)
@@ -126,12 +232,7 @@ namespace Client.Forms
                     bool isSuccess = await _restClient.DeleteBookAsync(selectedBook.Id);
                     if (isSuccess)
                     {
-                        MessageBox.Show("Книга успешно удалена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadBooks(); // Обновляем список книг
-                    }
-                    else
-                    {
-                        MessageBox.Show("Не удалось удалить книгу.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 catch (Exception ex)

@@ -30,7 +30,6 @@ namespace Client.Communication
                     {
                         IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse(ip), broadcastPort);
                         udpClient.Send(data, data.Length, endpoint);
-                        Console.WriteLine($"Отправлено сообщение на устройство: {ip}");
                     }
                     catch (Exception ex)
                     {

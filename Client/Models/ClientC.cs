@@ -32,7 +32,6 @@ namespace Client.Models
 
             if (string.IsNullOrEmpty(response))
             {
-                MessageBox.Show("Не удалось получить список серверов с указанной ролью.");
                 return servers;
             }
 

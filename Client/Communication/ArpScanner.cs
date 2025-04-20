@@ -6,7 +6,7 @@ public class ArpScanner
 {
     public static List<string> GetActiveIPs()
     {
-        var dynamicIPs = new List<string>();
+        var filteredIPs = new List<string>();
 
         // Выполняем команду arp -a
         ProcessStartInfo psi = new ProcessStartInfo
@@ -32,16 +32,16 @@ public class ArpScanner
                     // Разделяем строку на части (IP, MAC, Type)
                     var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    // Проверяем, что строка содержит все три части: IP, MAC и Type
-                    if (parts.Length >= 3 && IsValidIP(parts[0]) && parts[2].ToLower() == "динамический")
+                    // Проверяем, что строка содержит IP-адрес и он начинается с "192.168.0."
+                    if (parts.Length >= 1 && IsValidIP(parts[0]) && parts[0].StartsWith("192.168.0."))
                     {
-                        dynamicIPs.Add(parts[0]); // Добавляем IP-адрес в список
+                        filteredIPs.Add(parts[0]); // Добавляем IP-адрес в список
                     }
                 }
             }
         }
 
-        return dynamicIPs;
+        return filteredIPs;
     }
 
     private static bool IsValidIP(string ip)

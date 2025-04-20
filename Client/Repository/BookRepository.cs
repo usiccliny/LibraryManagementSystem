@@ -41,18 +41,19 @@ namespace Client.Repository
             return books;
         }
 
-        public void AddBook(Book book)
+        public int AddBook(Book book)
         {
             using (var connection = new NpgsqlConnection(ConnectionString))
             {
                 connection.Open();
                 var command = new NpgsqlCommand(
-                    "INSERT INTO Books (title, author, is_need_to_back) VALUES (@title, @author, @isNeedToBack);",
+                    "INSERT INTO Books (title, author) VALUES (@title, @author) RETURNING id;",
                     connection);
                 command.Parameters.AddWithValue("title", book.Title);
                 command.Parameters.AddWithValue("author", book.Author);
                 command.Parameters.AddWithValue("isNeedToBack", book.IsNeedToBack);
-                command.ExecuteNonQuery();
+
+                return book.Id = Convert.ToInt32(command.ExecuteScalar());
             }
         }
 

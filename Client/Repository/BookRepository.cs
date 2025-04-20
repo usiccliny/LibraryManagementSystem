@@ -32,8 +32,7 @@ namespace Client.Repository
                         {
                             Id = reader.GetInt32(0),
                             Title = reader.GetString(1),
-                            Author = reader.GetString(2),
-                            IsNeedToBack = reader.GetBoolean(3)
+                            Author = reader.GetString(2)
                         });
                     }
                 }
@@ -51,7 +50,6 @@ namespace Client.Repository
                     connection);
                 command.Parameters.AddWithValue("title", book.Title);
                 command.Parameters.AddWithValue("author", book.Author);
-                command.Parameters.AddWithValue("isNeedToBack", book.IsNeedToBack);
 
                 return book.Id = Convert.ToInt32(command.ExecuteScalar());
             }
@@ -68,7 +66,6 @@ namespace Client.Repository
                 command.Parameters.AddWithValue("id", book.Id);
                 command.Parameters.AddWithValue("title", book.Title);
                 command.Parameters.AddWithValue("author", book.Author);
-                command.Parameters.AddWithValue("isNeedToBack", book.IsNeedToBack);
                 command.ExecuteNonQuery();
             }
         }

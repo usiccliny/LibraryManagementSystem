@@ -61,7 +61,7 @@ namespace Client.Repository
             {
                 connection.Open();
                 var command = new NpgsqlCommand(
-                    "UPDATE Books SET title = @title, author = @author, is_need_to_back = @isNeedToBack WHERE id = @id;",
+                    "UPDATE Books SET title = @title, author = @author WHERE id = @id;",
                     connection);
                 command.Parameters.AddWithValue("id", book.Id);
                 command.Parameters.AddWithValue("title", book.Title);

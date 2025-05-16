@@ -1,30 +1,24 @@
-﻿using System;
-using System.Data;
-using Npgsql;
+﻿using System.Data;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Net;
+using Npgsql;
 using Client.Communication;
-using Client.Repository;
-using Client.Models;
 
-public class MajorServer
+public class Server
 {
     private string serverId;
     private string ipAddress;
     private int port;
     private const string ConnectionString = "Host=localhost;Port=5432;Database=library_db;Username=postgres;Password=11299133;";
     private TcpListener listener;
-    private BookRepository bookRepository;
     private readonly RabbitMqService _rabbitMqService;
 
-    public MajorServer(string serverId, string ipAddress, int port)
+    public Server(string serverId, string ipAddress, int port)
     {
         this.serverId = serverId;
         this.ipAddress = ipAddress;
         this.port = port;
-        this.bookRepository = new BookRepository(ConnectionString);
         this._rabbitMqService = new RabbitMqService("localhost", "guest", "guest");
 
         IPAddress ip = IPAddress.Parse(ipAddress);
@@ -33,7 +27,7 @@ public class MajorServer
 
     public void Start()
     {
-        RegisterServer(serverId, "major_server", ipAddress, port);
+        RegisterServer(serverId, "dispetcher", ipAddress, port);
         listener.Start();
 
         Thread broadcastThread = new Thread(StartBroadcasting)
@@ -48,7 +42,6 @@ public class MajorServer
         };
         acceptThread.Start();
 
-
         Thread cleanupThread = new Thread(() =>
         {
             while (true)
@@ -61,6 +54,17 @@ public class MajorServer
             IsBackground = true
         };
         cleanupThread.Start();
+
+        Console.WriteLine("Диспетчер запущен. Нажмите '0', чтобы завершить работу.");
+        while (true)
+        {
+            if (Console.ReadKey(true).KeyChar == '0')
+            {
+                Console.WriteLine("Завершение работы сервера...");
+                break;
+            }
+
+        }
 
     }
 
@@ -80,7 +84,7 @@ public class MajorServer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при принятии подключения: {ex.Message}");
+                Console.WriteLine($"Ошибка при принятии подключения: {ex.Message}");
             }
         }
     }
@@ -97,13 +101,13 @@ public class MajorServer
                 string message = Encoding.UTF8.GetString(buffer, 0, bytesRead).TrimEnd('\0');
 
                 var parts = message.Split('|');
-                if (parts[0] == "REGISTER_MINOR")
+                if (parts[0] == "REGISTER_SERVICE")
                 {
                     string serverId = parts[1];
                     string serverIp = parts[2];
                     int port = int.Parse(parts[3]);
 
-                    RegisterServer(serverId, "minor_server", serverIp, port);
+                    RegisterServer(serverId, "service", serverIp, port);
                     string role = AssignRoleToMinorServer(serverId);
 
                     string response = $"ACK|{role}";
@@ -131,33 +135,6 @@ public class MajorServer
                     string response = $"{serverInfo.IpAddress}:{serverInfo.Port}";
                     byte[] responseData = Encoding.UTF8.GetBytes(response);
                     stream.Write(responseData, 0, responseData.Length);
-                }
-                else if (parts[0] == "GET_BOOKS")
-                {
-                    var books = bookRepository.GetBooks();
-                    string response = Newtonsoft.Json.JsonConvert.SerializeObject(books);
-                    stream.Write(Encoding.UTF8.GetBytes(response), 0, response.Length);
-                }
-                else if (parts[0] == "ADD_BOOK")
-                {
-                    var book = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(parts[1]);
-                    book.Id = bookRepository.AddBook(book);
-                    stream.Write(Encoding.UTF8.GetBytes("ACK"), 0, 3);
-                    _rabbitMqService.PublishMessage($"BOOK_ADDED|{Newtonsoft.Json.JsonConvert.SerializeObject(book)}");
-                }
-                else if (parts[0] == "UPDATE_BOOK")
-                {
-                    var book = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(parts[2]);
-                    bookRepository.UpdateBook(book);
-                    stream.Write(Encoding.UTF8.GetBytes("ACK"), 0, 3);
-                    _rabbitMqService.PublishMessage($"BOOK_UPDATED|{Newtonsoft.Json.JsonConvert.SerializeObject(book)}");
-                }
-                else if (parts[0] == "DELETE_BOOK")
-                {
-                    int id = int.Parse(parts[1]);
-                    bookRepository.DeleteBook(id);
-                    stream.Write(Encoding.UTF8.GetBytes("ACK"), 0, 3);
-                    _rabbitMqService.PublishMessage($"BOOK_DELETED|{id}");
                 }
             }
         }
@@ -300,7 +277,7 @@ public class MajorServer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при отправке широковещательного сообщения: {ex.Message}");
+                Console.WriteLine($"Ошибка при отправке широковещательного сообщения: {ex.Message}");
             }
 
             Thread.Sleep(2000);
@@ -341,39 +318,35 @@ public class MajorServer
             checkCommand.Parameters.AddWithValue("role", requestedRole);
             var existingServer = checkCommand.ExecuteScalar();
 
-            if (existingServer != null)
-            {
-                // Сервер с запрошенной ролью уже существует
-                return existingServer.ToString();
-            }
+            return existingServer.ToString();
         }
 
-        using (var connection1 = new NpgsqlConnection(ConnectionString))
-        {
+        //using (var connection1 = new NpgsqlConnection(ConnectionString))
+        //{
 
-            connection1.Open();
+        //    connection1.Open();
 
-            // Если сервера с запрошенной ролью нет, ищем сервер для переназначения
-            var findServerCommand = new NpgsqlCommand(
-                "SELECT instance_id FROM MinorServerRoles WHERE last_seen > NOW() - INTERVAL '5 seconds' LIMIT 1;",
-                connection1);
-            var serverToReassign = findServerCommand.ExecuteScalar();
+        //    // Если сервера с запрошенной ролью нет, ищем сервер для переназначения
+        //    var findServerCommand = new NpgsqlCommand(
+        //        "SELECT instance_id FROM MinorServerRoles WHERE last_seen > NOW() - INTERVAL '5 seconds' LIMIT 1;",
+        //        connection1);
+        //    var serverToReassign = findServerCommand.ExecuteScalar();
 
-            if (serverToReassign == null)
-            {
-                throw new Exception("Нет доступных минорных серверов для переназначения роли.");
-            }
+        //    if (serverToReassign == null)
+        //    {
+        //        throw new Exception("Нет доступных минорных серверов для переназначения роли.");
+        //    }
 
-            // Переназначаем роль найденному серверу
-            var reassignCommand = new NpgsqlCommand(
-                "UPDATE MinorServerRoles SET role = @newRole, last_seen = CURRENT_TIMESTAMP WHERE instance_id = @instanceId;",
-                connection1);
-            reassignCommand.Parameters.AddWithValue("newRole", requestedRole);
-            reassignCommand.Parameters.AddWithValue("instanceId", serverToReassign.ToString());
-            reassignCommand.ExecuteNonQuery();
+        //    // Переназначаем роль найденному серверу
+        //    var reassignCommand = new NpgsqlCommand(
+        //        "UPDATE MinorServerRoles SET role = @newRole, last_seen = CURRENT_TIMESTAMP WHERE instance_id = @instanceId;",
+        //        connection1);
+        //    reassignCommand.Parameters.AddWithValue("newRole", requestedRole);
+        //    reassignCommand.Parameters.AddWithValue("instanceId", serverToReassign.ToString());
+        //    reassignCommand.ExecuteNonQuery();
 
-            return serverToReassign.ToString();
-        }
+        //    return serverToReassign.ToString();
+        //}
     }
 
     private (string IpAddress, int Port) GetServerInfoById(string serverId)

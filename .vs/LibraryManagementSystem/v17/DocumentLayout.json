@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\repository\\bookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\repository\\bookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EDF191ED-5C64-445A-A661-A68A6CEB9F8D}|Dispetcher\\Dispetcher.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\dispetcher\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDF191ED-5C64-445A-A661-A68A6CEB9F8D}|Dispetcher\\Dispetcher.csproj|solutionrelative:dispetcher\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\models\\clientc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\models\\clientc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\forms\\crudform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\forms\\crudform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,52 +23,16 @@
       "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\forms\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\models\\clientc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\models\\clientc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\models\\majorserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\models\\majorserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\models\\minorserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\models\\minorserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\forms\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\communication\\socketclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\communication\\socketclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\communication\\udpdiscoveryclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\communication\\udpdiscoveryclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\communication\\restclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\communication\\restclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\communication\\rabbitmqservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\communication\\rabbitmqservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\communication\\networkhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\communication\\networkhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\communication\\arpscanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\communication\\arpscanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\forms\\crudform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\forms\\crudform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\client\\forms\\crudform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F7DDEEC6-B0EE-4E7E-9626-3F6F6415E0DF}|Client\\Client.csproj|solutionrelative:client\\forms\\crudform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{F455468A-3CFB-4649-8A96-AF56B48ED5D8}|ServiceCrud\\Service.csproj|c:\\users\\usicc\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\librarymanagementsystem\\servicecrud\\repository\\bookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F455468A-3CFB-4649-8A96-AF56B48ED5D8}|ServiceCrud\\Service.csproj|solutionrelative:servicecrud\\repository\\bookrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,8 +42,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 112,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Server.cs",
+              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Dispetcher\\Server.cs",
+              "RelativeDocumentMoniker": "Dispetcher\\Server.cs",
+              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Dispetcher\\Server.cs",
+              "RelativeToolTip": "Dispetcher\\Server.cs",
+              "ViewState": "AQIAADQBAAAAAAAAAAAAwEMBAABKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T19:12:25.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClientC.cs",
+              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\ClientC.cs",
+              "RelativeDocumentMoniker": "Client\\Models\\ClientC.cs",
+              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\ClientC.cs",
+              "RelativeToolTip": "Client\\Models\\ClientC.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwA4AAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T19:11:10.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CrudForm.cs",
+              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\CrudForm.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\CrudForm.cs",
+              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\CrudForm.cs",
+              "RelativeToolTip": "Client\\Forms\\CrudForm.cs",
+              "ViewState": "AQIAANQAAAAAAAAAAAAmwO8AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T19:10:37.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "Client\\Forms\\MainForm.Designer.cs",
+              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\MainForm.Designer.cs",
+              "RelativeToolTip": "Client\\Forms\\MainForm.Designer.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAswDEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T19:06:46.949Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
@@ -90,208 +110,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Book.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\Book.cs",
-              "RelativeDocumentMoniker": "Client\\Models\\Book.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\Book.cs",
-              "RelativeToolTip": "Client\\Models\\Book.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T16:10:06.711Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClientC.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\ClientC.cs",
-              "RelativeDocumentMoniker": "Client\\Models\\ClientC.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\ClientC.cs",
-              "RelativeToolTip": "Client\\Models\\ClientC.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwCEAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:48:56.263Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SocketClient.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\SocketClient.cs",
-              "RelativeDocumentMoniker": "Client\\Communication\\SocketClient.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\SocketClient.cs",
-              "RelativeToolTip": "Client\\Communication\\SocketClient.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAowAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:48:01.165Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UdpDiscoveryClient.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\UdpDiscoveryClient.cs",
-              "RelativeDocumentMoniker": "Client\\Communication\\UdpDiscoveryClient.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\UdpDiscoveryClient.cs",
-              "RelativeToolTip": "Client\\Communication\\UdpDiscoveryClient.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:47:59.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RestClient.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\RestClient.cs",
-              "RelativeDocumentMoniker": "Client\\Communication\\RestClient.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\RestClient.cs",
-              "RelativeToolTip": "Client\\Communication\\RestClient.cs",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAIwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:47:54.516Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "NetworkHelper.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\NetworkHelper.cs",
-              "RelativeDocumentMoniker": "Client\\Communication\\NetworkHelper.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\NetworkHelper.cs",
-              "RelativeToolTip": "Client\\Communication\\NetworkHelper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:47:44.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ArpScanner.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\ArpScanner.cs",
-              "RelativeDocumentMoniker": "Client\\Communication\\ArpScanner.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\ArpScanner.cs",
-              "RelativeToolTip": "Client\\Communication\\ArpScanner.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:47:42.988Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BookRepository.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Repository\\BookRepository.cs",
-              "RelativeDocumentMoniker": "Client\\Repository\\BookRepository.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Repository\\BookRepository.cs*",
-              "RelativeToolTip": "Client\\Repository\\BookRepository.cs*",
-              "ViewState": "AQIAADEAAAAAAAAAAAAiwEMAAABHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:40:11.147Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "CrudForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\CrudForm.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\CrudForm.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\CrudForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "RelativeToolTip": "Client\\Forms\\CrudForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:30:59.727Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RabbitMqService.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\RabbitMqService.cs",
-              "RelativeDocumentMoniker": "Client\\Communication\\RabbitMqService.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Communication\\RabbitMqService.cs",
-              "RelativeToolTip": "Client\\Communication\\RabbitMqService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T15:20:46.344Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\MainForm.cs",
               "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\MainForm.cs",
               "RelativeToolTip": "Client\\Forms\\MainForm.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAowCsAAABaAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAuwBAAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T14:56:08.524Z",
+              "WhenOpened": "2025-05-16T19:06:10.125Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Program.cs",
+              "RelativeDocumentMoniker": "Client\\Program.cs",
+              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Program.cs",
+              "RelativeToolTip": "Client\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T19:05:26.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\MainForm.cs",
               "RelativeDocumentMoniker": "Client\\Forms\\MainForm.cs",
               "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\MainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "RelativeToolTip": "Client\\Forms\\MainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T14:56:07.138Z",
+              "WhenOpened": "2025-05-16T19:05:24.089Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MajorServer.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\MajorServer.cs",
-              "RelativeDocumentMoniker": "Client\\Models\\MajorServer.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\MajorServer.cs",
-              "RelativeToolTip": "Client\\Models\\MajorServer.cs",
-              "ViewState": "AQIAAHgAAAAAAAAAAAAIwIkAAABQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T15:00:49.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CrudForm.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\CrudForm.cs",
-              "RelativeDocumentMoniker": "Client\\Forms\\CrudForm.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Forms\\CrudForm.cs",
-              "RelativeToolTip": "Client\\Forms\\CrudForm.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T14:54:25.414Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MinorServer.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\MinorServer.cs",
-              "RelativeDocumentMoniker": "Client\\Models\\MinorServer.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Models\\MinorServer.cs",
-              "RelativeToolTip": "Client\\Models\\MinorServer.cs",
-              "ViewState": "AQIAABkBAAAAAAAAAAApwBkBAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T14:45:33.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Program.cs",
-              "RelativeDocumentMoniker": "Client\\Program.cs",
-              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\Client\\Program.cs",
-              "RelativeToolTip": "Client\\Program.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAACQAAABnAAAA",
+              "Title": "BookRepository.cs",
+              "DocumentMoniker": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\ServiceCrud\\Repository\\BookRepository.cs",
+              "RelativeDocumentMoniker": "ServiceCrud\\Repository\\BookRepository.cs",
+              "ToolTip": "C:\\Users\\usicc\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\study\\tppr-project\\LibraryManagementSystem\\ServiceCrud\\Repository\\BookRepository.cs",
+              "RelativeToolTip": "ServiceCrud\\Repository\\BookRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE8AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T14:39:08.767Z",
+              "WhenOpened": "2025-05-11T16:27:06.968Z",
               "EditorCaption": ""
             }
           ]

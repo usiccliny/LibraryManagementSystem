@@ -15,27 +15,9 @@ namespace Client.Forms
         public MainForm(string role)
         {
             this.role = role;
-            UpdateFormBasedOnRole();
-        }
 
-        private void UpdateFormBasedOnRole()
-        {
-            this.Controls.Clear();
-
-            switch (role)
-            {
-                case "client":
-                    InitializeComponent();
-                    this.lblCurrentRole.Text = "Текущая роль: Клиент";
-                    btnSearchBooks.Click += BtnSearchBooks_Click;
-                    break;
-                case "minor_server":
-                    InitializeMinorServerInterface();
-                    break;
-                case "major_server":
-                    InitializeMajorServerInterface();
-                    break;
-            }
+            InitializeComponent();
+            btnSearchBooks.Click += BtnSearchBooks_Click;
         }
 
         private void BtnSearchBooks_Click(object sender, EventArgs e)

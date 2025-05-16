@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "C+rARLbUz+U9SAyJVk/Y7cBBRAFAXdQR7MW1tT8pNTnaxYizgqPI22WWO/Bks0GVAJij015pQc8nVEFWQQ1hDA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\usicc\\OneDrive\\Рабочий стол\\study\\tppr-project\\LibraryManagementSystem\\Dispetcher\\Dispetcher.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\usicc\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\usicc\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\usicc\\.nuget\\packages\\npgsql\\9.0.3\\npgsql.9.0.3.nupkg.sha512",
+    "C:\\Users\\usicc\\.nuget\\packages\\rabbitmq.client\\6.2.1\\rabbitmq.client.6.2.1.nupkg.sha512",
+    "C:\\Users\\usicc\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\usicc\\.nuget\\packages\\system.threading.channels\\4.7.1\\system.threading.channels.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

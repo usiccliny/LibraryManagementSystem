@@ -1,16 +1,12 @@
 ﻿using Client.Communication;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.WebSockets;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Net.Sockets;
+using Client.Repository;
+using Client.Models;
 
-public class MinorServer
+public class Server
 {
     private string serverId;
     private string serverIp;
@@ -20,15 +16,17 @@ public class MinorServer
     private HttpListener httpListener;
 
     private readonly List<WebSocket> _clients = new List<WebSocket>();
-    private readonly RabbitMqService _rabbitMqService;
+    private RabbitMqService _rabbitMqService;
 
-    public MinorServer(string serverId, string serverIp, string majorServerIp, int majorServerPort)
+    private const string ConnectionString = "Host=localhost;Port=5432;Database=library_db;Username=postgres;Password=11299133;";
+    private BookRepository bookRepository;
+
+    public Server(string serverId, string serverIp, string majorServerIp, int majorServerPort)
     {
         this.serverId = serverId;
         this.serverIp = serverIp;
         this.majorServerIp = majorServerIp;
         this.majorServerPort = majorServerPort;
-        _rabbitMqService = new RabbitMqService(majorServerIp, "user1", "user1");
     }
 
     public void Start()
@@ -45,10 +43,14 @@ public class MinorServer
             httpListener = new HttpListener();
             httpListener.Prefixes.Add($"http://{serverIp}:{port}/api/");
             httpListener.Start();
+            bookRepository = new BookRepository(ConnectionString);
+            _rabbitMqService = new RabbitMqService("localhost", "guest", "guest");
         }
 
         if (role == "event")
         {
+            _rabbitMqService = new RabbitMqService(majorServerIp, "user1", "user1");
+
             StartWebSocketServer(port);
 
             _rabbitMqService.SubscribeToQueue(message =>
@@ -77,6 +79,16 @@ public class MinorServer
             IsBackground = true
         };
         heartbeatThread.Start();
+
+        Console.WriteLine($"Сервер запущен с ролью {role}. Нажмите '0', чтобы завершить работу.");
+        while (true)
+        {
+            if (Console.ReadKey(true).KeyChar == '0')
+            {
+                Console.WriteLine("Завершение работы сервера...");
+                break;
+            }
+        }
     }
 
     private void StartWebSocketServer(int port)
@@ -90,7 +102,7 @@ public class MinorServer
         }
         catch (HttpListenerException ex)
         {
-            MessageBox.Show($"Ошибка при запуске WebSocket-сервера: {ex.Message}");
+            Console.WriteLine($"Ошибка при запуске WebSocket-сервера: {ex.Message}");
             throw;
         }
 
@@ -114,18 +126,18 @@ public class MinorServer
                 }
                 else
                 {
-                    context.Response.StatusCode = 400; // Bad Request
+                    context.Response.StatusCode = 400;
                     context.Response.Close();
                 }
             }
             catch (HttpListenerException ex)
             {
-                MessageBox.Show($"Ошибка HttpListener: {ex.Message}");
+                Console.WriteLine($"Ошибка HttpListener: {ex.Message}");
                 break;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Неожиданная ошибка: {ex.Message}");
+                Console.WriteLine($"Неожиданная ошибка: {ex.Message}");
             }
         }
     }
@@ -153,7 +165,7 @@ public class MinorServer
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при работе с WebSocket: {ex.Message}");
+            Console.WriteLine($"Ошибка при работе с WebSocket: {ex.Message}");
             RemoveClient(webSocket);
         }
     }
@@ -179,7 +191,7 @@ public class MinorServer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при обработке HTTP-запроса: {ex.Message}");
+                Console.WriteLine($"Ошибка при обработке HTTP-запроса: {ex.Message}");
             }
 
             Thread.Sleep(1000);
@@ -197,46 +209,14 @@ public class MinorServer
             string path = request.Url.AbsolutePath;
             string requestData = new System.IO.StreamReader(request.InputStream).ReadToEnd();
 
-            string responseMessage = "";
+            string responseMessage = HandleRequest(method, path, requestData);
 
-            // Обработка GET и POST запросов для /api/books
-            if (path == "/api/books")
-            {
-                if (method == "GET")
-                {
-                    responseMessage = SendMessageToMajorServer("GET_BOOKS");
-                }
-                else if (method == "POST")
-                {
-                    responseMessage = SendMessageToMajorServer($"ADD_BOOK|{requestData}");
-                }
-            }
-            // Обработка PUT и DELETE запросов для /api/books/{id}
-            else if (path.StartsWith("/api/books/") && path.Split('/').Length == 4)
-            {
-                string id = path.Split('/')[3];
-
-                if (method == "PUT")
-                {
-                    responseMessage = SendMessageToMajorServer($"UPDATE_BOOK|{id}|{requestData}");
-                }
-                else if (method == "DELETE")
-                {
-                    responseMessage = SendMessageToMajorServer($"DELETE_BOOK|{id}");
-                }
-            }
-            else
-            {
-                responseMessage = "UNKNOWN_REQUEST";
-            }
-
-            byte[] buffer = Encoding.UTF8.GetBytes(responseMessage);
-            response.ContentLength64 = buffer.Length;
-            response.OutputStream.Write(buffer, 0, buffer.Length);
+            SendResponse(response, responseMessage);
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при обработке HTTP-запроса: {ex.Message}");
+            Console.WriteLine($"Ошибка при обработке HTTP-запроса: {ex.Message}");
+            SendErrorResponse(response, "INTERNAL_SERVER_ERROR");
         }
         finally
         {
@@ -244,48 +224,99 @@ public class MinorServer
         }
     }
 
-    private string SendMessageToMajorServer(string message)
+    private string HandleRequest(string method, string path, string requestData)
     {
-        using (TcpClient client = new TcpClient())
+        if (path == "/api/books")
         {
-            try
-            {
-                client.Connect(majorServerIp, majorServerPort);
-                var stream = client.GetStream();
-
-                // Отправка сообщения
-                byte[] data = Encoding.UTF8.GetBytes(message);
-                stream.Write(data, 0, data.Length);
-
-                // Получение ответа
-                var buffer = new byte[1024];
-                int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                return Encoding.UTF8.GetString(buffer, 0, bytesRead).TrimEnd('\0');
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при отправке сообщения на мажорный сервер: {ex.Message}");
-                throw;
-            }
+            return HandleBooksRequest(method, requestData);
         }
+        else if (path.StartsWith("/api/books/") && path.Split('/').Length == 4)
+        {
+            string id = path.Split('/')[3];
+            return HandleBookByIdRequest(method, id, requestData);
+        }
+        else
+        {
+            return "UNKNOWN_REQUEST";
+        }
+    }
+    private string HandleBooksRequest(string method, string requestData)
+    {
+        switch (method)
+        {
+            case "GET":
+                var books = bookRepository.GetBooks(); 
+                return Newtonsoft.Json.JsonConvert.SerializeObject(books);
+
+            case "POST":
+                var newBook = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(requestData); 
+                if (newBook == null) return "INVALID_BOOK_DATA";
+
+                int isAdded = bookRepository.AddBook(newBook);
+                _rabbitMqService.PublishMessage($"BOOK_ADDED|{Newtonsoft.Json.JsonConvert.SerializeObject(newBook)}");
+                return isAdded != null ? "BOOK_ADDED" : "FAILED_TO_ADD_BOOK";
+
+            default:
+                return "UNSUPPORTED_METHOD";
+        }
+    }
+
+    private string HandleBookByIdRequest(string method, string id, string requestData)
+    {
+        if (!int.TryParse(id, out int bookId)) return "INVALID_BOOK_ID";
+
+        switch (method)
+        {
+            case "PUT":
+                var updatedBook = Newtonsoft.Json.JsonConvert.DeserializeObject<Book>(requestData);
+                if (updatedBook == null || updatedBook.Id != bookId) return "INVALID_BOOK_DATA";
+
+                bookRepository.UpdateBook(updatedBook);
+                _rabbitMqService.PublishMessage($"BOOK_UPDATED|{Newtonsoft.Json.JsonConvert.SerializeObject(updatedBook)}");
+                return "BOOK_UPDATED";
+
+            case "DELETE":
+                bookRepository.DeleteBook(bookId);
+                _rabbitMqService.PublishMessage($"BOOK_DELETED|{bookId}");
+                return "BOOK_DELETED";
+
+            default:
+                return "UNSUPPORTED_METHOD";
+        }
+    }
+
+    private void SendResponse(HttpListenerResponse response, string responseMessage)
+    {
+        byte[] buffer = Encoding.UTF8.GetBytes(responseMessage);
+        response.ContentLength64 = buffer.Length;
+        response.OutputStream.Write(buffer, 0, buffer.Length);
+    }
+
+    private void SendErrorResponse(HttpListenerResponse response, string errorMessage)
+    {
+        string errorResponse = $"{{\"error\": \"{errorMessage}\"}}";
+        byte[] buffer = Encoding.UTF8.GetBytes(errorResponse);
+        response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        response.ContentLength64 = buffer.Length;
+        response.OutputStream.Write(buffer, 0, buffer.Length);
     }
 
     private string RegisterWithMajorServer(int port)
     {
         var socketClient = new SocketClient(majorServerIp, majorServerPort);
-        string message = $"REGISTER_MINOR|{serverId}|{serverIp}|{port}";
+        string message = $"REGISTER_SERVICE|{serverId}|{serverIp}|{port}";
         string response = socketClient.SendMessageAndGetResponse(message);
 
         var parts = response.Split('|');
         if (parts[0] == "ACK" && parts.Length >= 2)
         {
             string role = parts[1];
-            MessageBox.Show($"Минорный сервер успешно зарегистрирован с ролью: {role}");
+            Console.WriteLine($"Минорный сервер успешно зарегистрирован с ролью: {role}");
             return role;
         }
         else
         {
-            MessageBox.Show("Ошибка регистрации минорного сервера.");
+            Console.WriteLine("Ошибка регистрации минорного сервера.");
             return null;
         }
     }
@@ -303,7 +334,7 @@ public class MinorServer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при отправке состояния: {ex.Message}");
+                Console.WriteLine($"Ошибка при отправке состояния: {ex.Message}");
             }
         }
     }

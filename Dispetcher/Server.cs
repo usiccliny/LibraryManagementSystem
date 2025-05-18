@@ -236,14 +236,11 @@ public class Server
     {
         bool hasCrud = activeServers.Values.Contains("crud");
         bool hasEvent = activeServers.Values.Contains("event");
-        bool hasCache = activeServers.Values.Contains("cache");
 
         if (!hasCrud) return "crud";
         if (!hasEvent) return "event";
-        if (!hasCache) return "cache";
 
-
-        return "fallback";
+        return "crud";
     }
 
     private void RegisterClient(string clientId)
@@ -320,33 +317,6 @@ public class Server
 
             return existingServer.ToString();
         }
-
-        //using (var connection1 = new NpgsqlConnection(ConnectionString))
-        //{
-
-        //    connection1.Open();
-
-        //    // Если сервера с запрошенной ролью нет, ищем сервер для переназначения
-        //    var findServerCommand = new NpgsqlCommand(
-        //        "SELECT instance_id FROM MinorServerRoles WHERE last_seen > NOW() - INTERVAL '5 seconds' LIMIT 1;",
-        //        connection1);
-        //    var serverToReassign = findServerCommand.ExecuteScalar();
-
-        //    if (serverToReassign == null)
-        //    {
-        //        throw new Exception("Нет доступных минорных серверов для переназначения роли.");
-        //    }
-
-        //    // Переназначаем роль найденному серверу
-        //    var reassignCommand = new NpgsqlCommand(
-        //        "UPDATE MinorServerRoles SET role = @newRole, last_seen = CURRENT_TIMESTAMP WHERE instance_id = @instanceId;",
-        //        connection1);
-        //    reassignCommand.Parameters.AddWithValue("newRole", requestedRole);
-        //    reassignCommand.Parameters.AddWithValue("instanceId", serverToReassign.ToString());
-        //    reassignCommand.ExecuteNonQuery();
-
-        //    return serverToReassign.ToString();
-        //}
     }
 
     private (string IpAddress, int Port) GetServerInfoById(string serverId)

@@ -24,16 +24,13 @@ public class ArpScanner
             {
                 string result = reader.ReadToEnd();
 
-                // Парсим вывод команды arp -a
                 var lines = result.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var line in lines)
                 {
-                    // Разделяем строку на части (IP, MAC, Type)
                     var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    // Проверяем, что строка содержит IP-адрес и он начинается с "192.168.0."
-                    if (parts.Length >= 1 && IsValidIP(parts[0]) && parts[0].StartsWith("192.168.0."))
+                    if (parts.Length >= 1 && IsValidIP(parts[0]))
                     {
                         filteredIPs.Add(parts[0]); // Добавляем IP-адрес в список
                     }

@@ -6,7 +6,7 @@ namespace Dispetcher
     {
         static void Main(string[] args)
         {
-            string ipAddress = NetworkHelper.GetLocalIPAddress();
+            string ipAddress = NetworkHelper.GetIPv4AddressByNetworkName();
 
             var majorServer = new Server(
                 "major_server",

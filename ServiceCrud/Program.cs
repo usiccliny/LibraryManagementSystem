@@ -7,7 +7,7 @@ namespace ServiceCrud
         static void Main(string[] args)
         {
             string instanceId = Guid.NewGuid().ToString();
-            string ipAddress = NetworkHelper.GetLocalIPAddress();
+            string ipAddress = NetworkHelper.GetIPv4AddressByNetworkName();
 
             var udpDiscoveryForMinor = new UdpDiscoveryClient(9999);
             var (dispatcherIp, dispatcherPort) = udpDiscoveryForMinor.DiscoverDispatcher();

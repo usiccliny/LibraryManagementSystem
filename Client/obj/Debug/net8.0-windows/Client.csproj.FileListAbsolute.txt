@@ -23,8 +23,6 @@ C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManage
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\bin\Debug\net8.0-windows\Npgsql.dll
-C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.RoleSelectionForm.resources
-C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.PasswordForm.resources
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.CreateBookForm.resources
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.CrudForm.resources
 C:\Users\usicc\OneDrive\Рабочий стол\study\tppr-project\LibraryManagementSystem\Client\obj\Debug\net8.0-windows\Client.Forms.UpdateBookForm.resources

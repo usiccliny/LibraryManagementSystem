@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dispetcher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+462de3b2ce8ceb32243fbb21c94dac5b277bcaef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d50ef0db7edd84eddfa7437f88bafdf0ddabf0be")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dispetcher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dispetcher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

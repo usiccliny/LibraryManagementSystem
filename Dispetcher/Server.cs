@@ -12,14 +12,12 @@ public class Server
     private int port;
     private const string ConnectionString = "Host=localhost;Port=5432;Database=library_db;Username=postgres;Password=11299133;";
     private TcpListener listener;
-    private readonly RabbitMqService _rabbitMqService;
 
     public Server(string serverId, string ipAddress, int port)
     {
         this.serverId = serverId;
         this.ipAddress = ipAddress;
         this.port = port;
-        this._rabbitMqService = new RabbitMqService("localhost", "guest", "guest");
 
         IPAddress ip = IPAddress.Parse(ipAddress);
         this.listener = new TcpListener(ip, port);
